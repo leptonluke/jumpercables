@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=3 uid="uid://cb4fwuuulajve"]
+
+[ext_resource type="Script" uid="uid://cwpmswbsjokpo" path="res://focus/scripts/mainscene.gd" id="1_p2k5b"]
+[ext_resource type="PackedScene" uid="uid://cl5xr0fnqytn" path="res://focus/playerdata/player.tscn" id="2_6dwnn"]
+[ext_resource type="PackedScene" uid="uid://dl1gbeiwp4enh" path="res://focus/settings.tscn" id="3_hxat7"]
+[ext_resource type="Script" uid="uid://ciygt04i4ny1l" path="res://focus/autoload.gd" id="4_5e8ce"]
+[ext_resource type="PackedScene" uid="uid://df7prkudnf1mm" path="res://inv/inventory/inventory.tscn" id="5_6dwnn"]
+[ext_resource type="Script" uid="uid://42gpdg8w33oc" path="res://focus/inventory_interface.gd" id="5_hxat7"]
+[ext_resource type="PackedScene" uid="uid://utxpn7vbro4o" path="res://inv/inventory/slot.tscn" id="7_5e8ce"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1x8q5"]
+sky_top_color = Color(0.584314, 0.698039, 0.905882, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.262745, 0.407843, 1, 1)
+ground_curve = 0.48503
+sun_curve = 0.369343
+
+[sub_resource type="Sky" id="Sky_mtsef"]
+sky_material = SubResource("ProceduralSkyMaterial_1x8q5")
+
+[sub_resource type="Environment" id="Environment_sdnif"]
+background_mode = 2
+background_color = Color(0.443137, 0.576471, 1, 1)
+sky = SubResource("Sky_mtsef")
+
+[sub_resource type="BoxMesh" id="BoxMesh_mbn0y"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0n0xx"]
+data = PackedVector3Array(-10, 0.5, 10, 10, 0.5, 10, -10, -0.5, 10, 10, 0.5, 10, 10, -0.5, 10, -10, -0.5, 10, 10, 0.5, -10, -10, 0.5, -10, 10, -0.5, -10, -10, 0.5, -10, -10, -0.5, -10, 10, -0.5, -10, 10, 0.5, 10, 10, 0.5, -10, 10, -0.5, 10, 10, 0.5, -10, 10, -0.5, -10, 10, -0.5, 10, -10, 0.5, -10, -10, 0.5, 10, -10, -0.5, -10, -10, 0.5, 10, -10, -0.5, 10, -10, -0.5, -10, 10, 0.5, 10, -10, 0.5, 10, 10, 0.5, -10, -10, 0.5, 10, -10, 0.5, -10, 10, 0.5, -10, -10, -0.5, 10, 10, -0.5, 10, -10, -0.5, -10, 10, -0.5, 10, 10, -0.5, -10, -10, -0.5, -10)
+
+[node name="main scene" type="Node3D"]
+script = ExtResource("1_p2k5b")
+
+[node name="player" parent="." instance=ExtResource("2_6dwnn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 15.633, 0)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="settings" parent="UI" instance=ExtResource("3_hxat7")]
+
+[node name="scriptstuf" type="Node3D" parent="UI"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+script = ExtResource("4_5e8ce")
+
+[node name="world" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="world"]
+environment = SubResource("Environment_sdnif")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="world"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 7, 22)
+light_color = Color(1, 1, 0, 1)
+shadow_enabled = true
+
+[node name="eviroment" type="Node3D" parent="."]
+
+[node name="UInv" type="CanvasLayer" parent="."]
+
+[node name="playerinterface" type="Control" parent="UInv"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_hxat7")
+
+[node name="playerinventory" parent="UInv/playerinterface" instance=ExtResource("5_6dwnn")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="grabbedslot" parent="UInv/playerinterface" instance=ExtResource("7_5e8ce")]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_mbn0y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_0n0xx")

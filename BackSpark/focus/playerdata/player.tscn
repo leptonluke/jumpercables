@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl5xr0fnqytn"]
+
+[ext_resource type="Script" uid="uid://bg62jya2obbt8" path="res://focus/scripts/player.gd" id="1_w06yg"]
+[ext_resource type="Resource" uid="uid://dku7hobucndu2" path="res://inv/inventory/test_inv.tres" id="2_431ch"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dbe50"]
+
+[node name="player" type="CharacterBody3D"]
+floor_max_angle = 0.872665
+script = ExtResource("1_w06yg")
+inventory_data = ExtResource("2_431ch")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_dbe50")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="interactray" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, 0, -2.5)
+collision_mask = 4
+
+[node name="coyotetime" type="Timer" parent="."]
+process_mode = 1
+process_callback = 0
+wait_time = 0.2
+one_shot = true
+
+[node name="slide" type="Node3D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_right = 5.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="slidestate" type="Node3D" parent="."]
+
+[node name="wallstate" type="Node3D" parent="."]
+
+[node name="runstate" type="Node3D" parent="."]
+
+[node name="sneakstate" type="Node3D" parent="."]
+
+[connection signal="timeout" from="coyotetime" to="." method="_on_coyotetime_timeout"]

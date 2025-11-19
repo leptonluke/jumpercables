@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="InventoryData" load_steps=7 format=3 uid="uid://dku7hobucndu2"]
+
+[ext_resource type="Script" uid="uid://cwewougetgeek" path="res://inv/inventory/inventory_data.gd" id="1_gf6bu"]
+[ext_resource type="Script" uid="uid://6l2wuiiluav1" path="res://inv/inventory/slot_data.gd" id="2_x2j6t"]
+[ext_resource type="Resource" uid="uid://bhqwebd8vfslq" path="res://inv/item/items/apple.tres" id="3_lcrgd"]
+
+[sub_resource type="Resource" id="Resource_v0p7p"]
+script = ExtResource("2_x2j6t")
+item_data = ExtResource("3_lcrgd")
+metadata/_custom_type_script = "uid://6l2wuiiluav1"
+
+[sub_resource type="Resource" id="Resource_gf6bu"]
+script = ExtResource("2_x2j6t")
+item_data = ExtResource("3_lcrgd")
+quantity = 5
+metadata/_custom_type_script = "uid://6l2wuiiluav1"
+
+[sub_resource type="Resource" id="Resource_x2j6t"]
+script = ExtResource("2_x2j6t")
+item_data = ExtResource("3_lcrgd")
+metadata/_custom_type_script = "uid://6l2wuiiluav1"
+
+[resource]
+script = ExtResource("1_gf6bu")
+slot_datas = Array[ExtResource("2_x2j6t")]([SubResource("Resource_v0p7p"), SubResource("Resource_gf6bu"), SubResource("Resource_x2j6t"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+metadata/_custom_type_script = "uid://cwewougetgeek"

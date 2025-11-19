@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://3rpas7ejt7rd"]
+
+[ext_resource type="Script" uid="uid://dwrt8xlbqt1c2" path="res://inv/item/Item_data.gd" id="1_vjxss"]
+[ext_resource type="Texture2D" uid="uid://dq5v6yjna2rob" path="res://focus/png/inventory.png" id="2_lbvg2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbvg2"]
+atlas = ExtResource("2_lbvg2")
+region = Rect2(64, 224, 32, 32)
+
+[resource]
+script = ExtResource("1_vjxss")
+name = "accelerator"
+description = "a reliable device that all should use to maintain a funciotional form"
+stackable = true
+tesxture = SubResource("AtlasTexture_lbvg2")
+metadata/_custom_type_script = "uid://dwrt8xlbqt1c2"
